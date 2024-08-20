@@ -15,8 +15,8 @@ jobs:
       run: docker build -t myimg .
     - uses: docker/login-action@v3
     env:
-      USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      USERNAME: ${{secrets.DOCKER_USERNAME}}
+      PASSWORD: ${{secrets.DOCKER_PASSWORD}}
 
     # - name: push image to dockerhub
     #     run: docker tag myimg:latest amoltribhuwan/angular:latest
