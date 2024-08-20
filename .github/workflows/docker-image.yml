@@ -21,3 +21,4 @@ jobs:
           run: |
             docker tag myimg:latest amoltribhuwan/angular:latest
             docker push amoltribhuwan/angular:latest
+            
