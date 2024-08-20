@@ -35,4 +35,6 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.SSH_PORT }}
-        script: chmod +x docker.sh &&  ./docker.sh
+        script: |
+          sudo chmod +x docker.sh
+          ./docker.sh
