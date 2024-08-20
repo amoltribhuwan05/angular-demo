@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    
     - name: Build the Docker image
       run: docker build -t myimg .
 
@@ -28,8 +29,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: ssh into server
     - uses: appleboy/ssh-action@v1.0.3
+      name: ssh into server
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
