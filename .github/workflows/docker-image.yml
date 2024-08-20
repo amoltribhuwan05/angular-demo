@@ -35,8 +35,9 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.SSH_PORT }}
-        script: docker stop mycont
-                docker rm mycont
-                docker rmi amoltribhuwan/angular:latest
-                docker pull amoltribhuwan/angular:latest
-                docker run -d -p 80:80 --name mycont amoltribhuwan/angular:latest
+        script: |
+          docker stop mycont
+          docker rm mycont
+          docker rmi amoltribhuwan/angular:latest
+          docker pull amoltribhuwan/angular:latest
+          docker run -d -p 80:80 --name mycont amoltribhuwan/angular:latest
