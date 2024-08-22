@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}    
 
     - name: Tag Image      
-      run: docker tag myimg:dev amoltribhuwan/angular:dev
+      run: docker tag myimg:latest amoltribhuwan/angular:dev
 
     - name: push image
       run: docker push amoltribhuwan/angular:dev
