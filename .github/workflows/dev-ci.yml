@@ -20,11 +20,18 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}    
 
-    - name: Tag Image      
-      run: docker tag myimg:latest amoltribhuwan/angular:angular-dev
+    # - name: Tag Image      
+    #   run: docker tag myimg:latest amoltribhuwan/angular:angular-dev
 
-    - name: push image
-      run: docker push amoltribhuwan/angular:angular-dev
+    # - name: push image
+    #   run: docker push amoltribhuwan/angular:angular
+    - uses: docker/build-push-action@v3
+      with: 
+        context: .
+        push: true
+        tags: amoltribhuwan/angular:angular
+        cache-from: type=registry,ref=amoltribhuwan/angular:buildcache
+        cache-to: type=registry,ref=amoltribhuwan/angular:buildcache
 
   # deploy:
   #   runs-on: ubuntu-latest
