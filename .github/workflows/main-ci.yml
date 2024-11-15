@@ -32,9 +32,7 @@ jobs:
          command: quickview,cves
          image: amoltribhuwan/angular:latest
          only-severities: critical,high
-
-    - name: Checkout code
-      uses: actions/checkout@master
+         
     - name: Update diagram
       uses: githubocto/repo-visualizer@0.7.1
       with:
