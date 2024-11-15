@@ -47,14 +47,14 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-           "*${{ github.actor }} created commit*
+           *${{ github.actor }} created commit*
 
             *Commit message:* ${{ github.event.commits[0].message }}
 
             *Repository:* ${{ github.repository }}
 
             *See changes:* https://github.com/${{ github.repository }}/commit/${{github.sha}}
-            *🚀 Docker image built and pushed successfully!*\n*Commit:* `${{ github.event.workflow_run.head_commit.id }}`\n*Branch:* `${{ github.ref }}`"
+            *🚀 Docker image built and pushed successfully!*\n*Commit:* `${{ github.event.workflow_run.head_commit.id }}`\n*Branch:* `${{ github.ref }}`
 
   #   runs-on: ubuntu-latest
   #   needs: build
