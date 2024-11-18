@@ -78,9 +78,14 @@ jobs:
     #      image: 982534365024.dkr.ecr.ap-south-1.amazonaws.com/angular:dev
     #      only-severities: critical,high
 
-    - name: Scan image
-      uses: anchore/scan-action@v3
+    # - name: Scan image
+    #   uses: anchore/scan-action@v3
+    #   with:
+    #     image: 982534365024.dkr.ecr.ap-south-1.amazonaws.com/angular:dev
+    #     fail-build: false
+    #     output-format: sarif
+
+    - name: Scan for vulnerabilities
+      uses: crazy-max/ghaction-container-scan@v3
       with:
         image: 982534365024.dkr.ecr.ap-south-1.amazonaws.com/angular:dev
-        fail-build: false
-        output-format: sarif
