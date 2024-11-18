@@ -47,3 +47,5 @@ jobs:
          command: quickview,cves
          image: amoltribhuwan/angular:latest
          only-severities: critical,high
+         registry-user: ${{ secrets.DOCKER_USERNAME }}
+         registry-password: ${{ secrets.DOCKER_PASSWORD }}
