@@ -99,3 +99,4 @@ jobs:
       with:
         image: $ECR_REPOSITORY:$IMAGE_TAG
         severity_threshold: HIGH
+        annotations: true
