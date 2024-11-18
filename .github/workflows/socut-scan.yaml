@@ -75,5 +75,5 @@ jobs:
       with:
          command: quickview,cves
         #  image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          image: registry:$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          image: registry://$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
          only-severities: critical,high
