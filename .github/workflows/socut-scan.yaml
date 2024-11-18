@@ -45,7 +45,5 @@ jobs:
       uses: docker/scout-action@v1
       with:
          command: quickview,cves
-         image: amoltribhuwan/angular:latest
+         image: local://amoltribhuwan/angular:latest
          only-severities: critical,high
-         registry-user: ${{ secrets.DOCKER_USERNAME }}
-         registry-password: ${{ secrets.DOCKER_PASSWORD }}
