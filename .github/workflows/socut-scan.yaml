@@ -97,6 +97,6 @@ jobs:
     - name: Scan for vulnerabilities
       uses: crazy-max/ghaction-container-scan@v3.0.0
       with:
-        image: $ECR_REPOSITORY:$IMAGE_TAG
+        image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         severity_threshold: HIGH
         annotations: true
