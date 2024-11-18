@@ -1,4 +1,4 @@
-name: Docker Image CI For Main Branch
+name: Docker Image CI For scout Branch
 
 on:
   push:
@@ -34,6 +34,7 @@ jobs:
          only-severities: critical,high
 
   scan:
+    name: Scan the Docker image
     runs-on: ubuntu-latest
     steps:
     - name: pull the docker image
