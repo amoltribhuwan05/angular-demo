@@ -1,9 +1,6 @@
 name: Docker Image CI For scout Branch
-
 on:
   push:
-    branches: [ "scout" ]
-  pull_request:
     branches: [ "scout" ]
 
 env:
@@ -73,14 +70,9 @@ jobs:
       run: |
         docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       
-    # - name: Docker Scout Quickview and CVEs
-    #   uses: docker/scout-action@v1
-    #   with:
-    #      command: quickview,cves
-    #      image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-    #      only-severities: critical,high
-
     - name: Docker Scout Quickview and CVEs
-      run: |
-        curl -sSL https://get.docker.com/scout-cli | sh
-        docker scout inspect --local $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      uses: docker/scout-action@v1
+      with:
+         command: quickview,cves
+         image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+         only-severities: critical,high
