@@ -6,10 +6,15 @@ on:
   pull_request:
     branches: [ "scout" ]
 
+env:
+  AWS_REGION: ap-south-1          # set this to your preferred AWS region, e.g. us-west-1
+  ECR_REPOSITORY: angular         # set this to your Amazon ECR repository name
+
 jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -19,7 +24,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
+        aws-region: ${{ env.AWS_REGION }}
 
     - name: Login to Amazon ECR
       id: login-ecr
@@ -28,26 +33,24 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-        ECR_REGISTRY:  ${{secrets.REGISTRY}}
-        IMAGE_TAG: latest
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        IMAGE_TAG: ${{ github.sha }}
       run: |
-        # Build a docker container and
-        # push it to ECR so that it can
-        # be deployed to ECS.
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
 
-  scan:
-    name: Scan the Docker image
-    runs-on: ubuntu-latest
-    steps:
-    - name: pull the docker image
-      run: docker pull amoltribhuwan/angular:latest
+  # scan:
+  #   name: Scan the Docker image
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: pull the docker image
+  #     run: docker pull amoltribhuwan/angular:latest
 
-    - name: Docker Scout Quickview and CVEs
-      uses: docker/scout-action@v1
-      with:
-         command: quickview,cves
-         image: local://amoltribhuwan/angular:latest
-         only-severities: critical,high
+  #   - name: Docker Scout Quickview and CVEs
+  #     uses: docker/scout-action@v1
+  #     with:
+  #        command: quickview,cves
+  #        image: local://amoltribhuwan/angular:latest
+  #        only-severities: critical,high
