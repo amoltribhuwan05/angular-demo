@@ -95,7 +95,7 @@ jobs:
     #     image: 982534365024.dkr.ecr.ap-south-1.amazonaws.com/angular:dev
 
     - name: Scan for vulnerabilities
-      uses: crazy-max/ghaction-container-scan@v3
+      uses: crazy-max/ghaction-container-scan@v3.0.0
       with:
         image: $ECR_REPOSITORY:$IMAGE_TAG
         severity_threshold: HIGH
