@@ -74,7 +74,6 @@ jobs:
       uses: docker/scout-action@v1
       with:
          command: quickview,cves
-        #  image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        #  image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
         image: 982534365024.dkr.ecr.ap-south-1.amazonaws.com/angular:latest
         only-severities: critical,high
