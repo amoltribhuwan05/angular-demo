@@ -85,11 +85,17 @@ jobs:
     #     fail-build: false
     #     output-format: sarif
 
-    - name: KSOC Image Scan
-      uses: ksoclabs/image-scan-action@v0.0.4
+    # - name: KSOC Image Scan
+    #   uses: ksoclabs/image-scan-action@v0.0.4
+    #   with:
+    #     # fail_on_severity: CRITICAL
+    #   # ignore_cves: |
+    #   #   CVE-2021-1234
+    #   #   CVE-2021-5678
+    #     image: 982534365024.dkr.ecr.ap-south-1.amazonaws.com/angular:dev
+
+    - name: Scan for vulnerabilities
+      uses: crazy-max/ghaction-container-scan@v3
       with:
-        # fail_on_severity: CRITICAL
-      # ignore_cves: |
-      #   CVE-2021-1234
-      #   CVE-2021-5678
-        image: 982534365024.dkr.ecr.ap-south-1.amazonaws.com/angular:dev
+        image: $ECR_REPOSITORY:$IMAGE_TAG
+        severity_threshold: HIGH
