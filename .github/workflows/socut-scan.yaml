@@ -75,5 +75,5 @@ jobs:
          command: quickview,cves
         #  image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         #  image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-         image: 982534365024.dkr.ecr.ap-south-1.amazonaws.com/angular:latest
+         image: 982534365024.dkr.ecr.ap-south-1.amazonaws.com/angular:dev
          only-severities: critical,high
