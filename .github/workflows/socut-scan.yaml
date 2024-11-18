@@ -92,4 +92,4 @@ jobs:
       # ignore_cves: |
       #   CVE-2021-1234
       #   CVE-2021-5678
-        image: localbuild/testimage:latest
+        image: 982534365024.dkr.ecr.ap-south-1.amazonaws.com/angular:dev
