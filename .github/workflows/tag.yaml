@@ -1,0 +1,58 @@
+name: Docker Image CI For Release TAG
+
+on:
+  push:
+    tags:
+    - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    -  name: checkout into repository
+       uses: actions/checkout@v4
+
+    - name: Extract Git Tag
+      id: extract_tag
+      run: |
+        echo "GIT_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+    
+    -  name: set up docker buildx for cache
+       uses: docker/setup-buildx-action@v3
+    
+    # - name: Build the Docker image
+    #   run: docker build -t myimg .
+    
+    - name: Login to Dockerhub  
+      uses: docker/login-action@v3
+      with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}    
+
+    # - name: Tag Image      
+    #   run: docker tag myimg:latest amoltribhuwan/angular:angular-dev
+
+    # - name: push image
+    #   run: docker push amoltribhuwan/angular:angular
+
+    - name: build & push image to dockerhub using cache
+      uses: docker/build-push-action@v3
+      with: 
+        context: .
+        push: true
+        tags: amoltribhuwan/angular:${{ env.GIT_TAG }}
+        cache-from: type=registry,ref=amoltribhuwan/angular:buildcache
+        cache-to: type=registry,ref=amoltribhuwan/angular:buildcache
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #   - uses: appleboy/ssh-action@v1.0.3
+  #     name: ssh into server
+  #     with:
+  #       host: ${{ secrets.SSH_HOST }}
+  #       username: ${{ secrets.SSH_USERNAME }}
+  #       key: ${{ secrets.SSH_PASSWORD }}
+  #       port: ${{ secrets.SSH_PORT }}
+  #       script: bash /home/ubuntu/docker.sh
