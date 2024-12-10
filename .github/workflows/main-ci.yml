@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 name: Docker Image CI For Main Branch
+=======
+name: Docker Image CI For Main Brach
+>>>>>>> dev
 
 on:
   push:
@@ -21,10 +25,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}    
 
     - name: Tag Image      
-      run: docker tag myimg:latest amoltribhuwan/angular:latest
+      run: docker tag myimg:latest amoltribhuwan/angular:angular-main
 
     - name: push image
-      run: docker push amoltribhuwan/angular:latest
+      run: docker push amoltribhuwan/angular:angular-main
 
     - name: Docker Scout Quickview and CVEs
       uses: docker/scout-action@v1
@@ -67,3 +71,7 @@ jobs:
   #       key: ${{ secrets.SSH_PASSWORD }}
   #       port: ${{ secrets.SSH_PORT }}
   #       script: bash /home/ubuntu/docker.sh
+<<<<<<< HEAD
+=======
+  #
+>>>>>>> dev
